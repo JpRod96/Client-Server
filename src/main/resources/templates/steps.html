@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Steps</title>
+
+</head>
+<style>
+
+ ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+             background-color: #111;
+        }
+        .buttonLogOut{
+        background-color: #d81c25;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        }
+        .buttonProfile{
+        background-color: #2c8214;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;}
+        .form-inline{
+    display:inline-block;
+    }
+    .button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+</style>
+
+
+
+<body>
+<div class="panel panel-default">
+    <header>
+        <ul>
+            <li><form th:action="@{/}" method="get">
+                <button class="buttonProfile">Home</button>
+            </form></li>
+            <li>
+                <form th:action="@{/myProfile}" method="get">
+                    <button class="buttonProfile">View-Profile</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{/mySteps}" method="get">
+                    <button class="buttonProfile">View-Stats</button>
+                </form>
+            </li>
+            <li style="float:right">
+                <form th:action="@{/logout}" method="get">
+                    <button class="buttonLogOut" name="registration"
+                            type="Submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+    </header>
+    <div class="panel-body">
+        <center>
+        <div class="container">
+            <form class="form-inline" data-th-action="@{/admin/searchResults}" method="get" >
+                <div class="input-group">
+                    <div class="form-group">
+                        <label>From:</label>
+                        <input type="date" id="dateStart"  class="form-control"/>
+                        <label>To:</label>
+                        <input type="date" id = "dateEnd"  class="form-control"/>
+                    </div>
+                </div>
+                <br/>
+                <button type="submit" class="button">Generate Report</button>
+            </form>
+        </div>
+         <br/><br/>
+        <div class="container">
+                <div th:if="${not #lists.isEmpty(steps)}">
+                    <table class="table table-bordered">
+
+                        <tr>
+                            <th>Id</th>
+                            <th># Steps</th>
+                            <th>Upload Date</th>
+                            <th>Register Date</th>
+                        </tr>
+
+                        <tr th:each="step : ${steps}">
+                            <td th:text="${step.id}">Id</td>
+                            <td th:text="${step.quantity}">Quantity</td>
+                            <td th:text="${step.uploadDate}">Upload Date</td>
+                            <td th:text="${step.registerDate}">Register Date</td>
+
+                        </tr>
+
+                    </table>
+                </div>
+        </div>
+        </center>
+    </div>
+    <div class="panel-footer">
+        <center>
+            <h4>FAT FIT Tm</h4>
+        </center>
+    </div>
+</div>
+
+
+</body>
+</html>

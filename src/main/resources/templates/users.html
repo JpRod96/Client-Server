@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+    <title>Users</title>
+
+</head>
+<style>
+            ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        li a:hover {
+             background-color: #111;
+        }
+        .buttonLogOut{
+        background-color: #d81c25;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        }
+        .buttonProfile{
+        background-color: #2c8214;
+        border: none;
+        color: black;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;}
+</style>
+<body>
+<header>
+    <ul>
+        <li><form th:action="@{/}" method="get">
+            <button class="buttonProfile">Home</button>
+        </form></li>
+        <li>
+            <form th:action="@{/myProfile}" method="get">
+                <button class="buttonProfile">View-Profile</button>
+            </form>
+        </li>
+        <li>
+            <form th:action="@{/mySteps}" method="get">
+                <button class="buttonProfile">View-Stats</button>
+            </form>
+        </li>
+        <li style="float:right">
+            <form th:action="@{/logout}" method="get">
+                <button class="buttonLogOut" name="registration"
+                        type="Submit">Logout</button>
+            </form>
+        </li>
+    </ul>
+</header>
+<br/><br/>
+
+<div class="container">
+    <div th:if="${not #lists.isEmpty(users)}">
+        <h2>User List</h2>
+        <table class="table table-striped" border="1px">
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Weigth</th>
+                <th>Heigth</th>
+                <th>Age</th>
+                <th>Gender</th>
+
+
+
+            </tr>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.id}"><a href="/user/${user.id}">Id</a></td>
+                <td th:text="${user.username}">Username</td>
+                <td th:text="${user.weigth}">Weigth</td>
+                <td th:text="${user.heigth}">Heigth</td>
+                <td th:text="${user.age}">Age</td>
+                <td th:text="${user.gender == true ? 'Male' : 'Female'}">Gender</td>
+
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+</body>
+</html>
